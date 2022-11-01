@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
+import { ROUTES } from '../../constants';
+
 const NAVIGATION_LINKS = [
-  { label: 'Our process', link: '' },
-  { label: 'Our work', link: '' },
-  { label: 'About us', link: '' },
+  { label: 'Our process', link: ROUTES.OUR_PROCESS },
+  { label: 'Our work', link: ROUTES.OUR_WORK },
+  { label: 'About us', link: ROUTES.ABOUT_US },
 ];
 
 export function Header() {
+  const [currentTab, setCurrentTab] = useState<string>();
+  const navigate = useNavigate();
+
+  const handleNavigate = (label: string, route: ROUTES) => () => {
+    setCurrentTab(label);
+    navigate(route);
+  };
+
   return (
     <div className={styles.HeaderWrapper}>
       <div className={styles.HeaderLogo}>Logo</div>
       <div className={styles.HeaderNavigation}>
-        {NAVIGATION_LINKS.map(({ label }) => (
-          <span className={styles.HeaderNavigationItem}>{label}</span>
+        {NAVIGATION_LINKS.map(({ label, link }) => (
+          <span
+            className={`${styles.HeaderNavigationItem} ${label === currentTab && styles.HeaderActiveNavigationItem}`}
+            onClick={handleNavigate(label, link)}
+          >
+            {label}
+          </span>
         ))}
       </div>
     </div>

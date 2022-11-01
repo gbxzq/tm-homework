@@ -1,10 +1,20 @@
-import React from 'react';
-import { Header } from '../../components';
+import { useEffect, useRef, useState } from 'react';
+
+import video from '../../assets/video/promo.mp4';
+import styles from './styles.module.scss';
 
 export function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
-    <div>
-      <Header />
+    <div className={styles.VideoPromoWrapper}>
+      {videoRef.current?.ended ? (
+        'Contact us'
+      ) : (
+        <video width="100%" ref={videoRef} controls>
+          <source src={video} type="video/mp4" />
+        </video>
+      )}
     </div>
   );
 }
