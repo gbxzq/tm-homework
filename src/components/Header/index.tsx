@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 
 import styles from './styles.module.scss';
 
@@ -22,7 +23,15 @@ export function Header() {
 
   return (
     <div className={styles.HeaderWrapper}>
-      <div className={styles.HeaderLogo}>Logo</div>
+      <div
+        className={styles.HeaderLogo}
+        onClick={() => {
+          navigate('/');
+          setCurrentTab('');
+        }}
+      >
+        <img src={logo} width="150px" alt="logo" />
+      </div>
       <div className={styles.HeaderNavigation}>
         {NAVIGATION_LINKS.map(({ label, link }) => (
           <span

@@ -1,0 +1,44 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ContentContainer {
+  // position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+}
+
+.Circle {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: whitesmoke;
+  border-radius: 150px;
+  font-size: 24px;
+  color: black;
+  animation: fadeIn 1.5s;
+}
+
+.CircleWithArrow {
+  &::before {
+    content: '';
+    position: absolute;
+    background: url('../../assets/images/arrow.svg') no-repeat;
+    transform: rotate(90deg);
+    margin: 0px 600px 300px 0px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
