@@ -11,7 +11,7 @@ export function Home() {
       {videoRef.current?.ended ? (
         'Contact us'
       ) : (
-        <video width="100%" ref={videoRef} controls>
+        <video width="80%" ref={videoRef} controls>
           <source src={video} type="video/mp4" />
         </video>
       )}

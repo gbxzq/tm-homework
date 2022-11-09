@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
 import styles from './styles.module.scss';
@@ -8,18 +8,20 @@ import { ROUTES } from '../../constants';
 
 const NAVIGATION_LINKS = [
   { label: 'Our process', link: ROUTES.OUR_PROCESS },
-  { label: 'Our work', link: ROUTES.OUR_WORK },
   { label: 'About us', link: ROUTES.ABOUT_US },
 ];
 
 export function Header() {
-  const [currentTab, setCurrentTab] = useState<string>();
+  const { pathname } = useLocation();
+  const [currentTab, setCurrentTab] = useState<string>(pathname);
   const navigate = useNavigate();
 
-  const handleNavigate = (label: string, route: ROUTES) => () => {
-    setCurrentTab(label);
+  const handleNavigate = (route: ROUTES) => () => {
+    setCurrentTab(route);
     navigate(route);
   };
+
+  console.log(pathname);
 
   return (
     <div className={styles.HeaderWrapper}>
@@ -35,8 +37,8 @@ export function Header() {
       <div className={styles.HeaderNavigation}>
         {NAVIGATION_LINKS.map(({ label, link }) => (
           <span
-            className={`${styles.HeaderNavigationItem} ${label === currentTab && styles.HeaderActiveNavigationItem}`}
-            onClick={handleNavigate(label, link)}
+            className={`${styles.HeaderNavigationItem} ${link === currentTab && styles.HeaderActiveNavigationItem}`}
+            onClick={handleNavigate(link)}
           >
             {label}
           </span>
